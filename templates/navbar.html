@@ -1,0 +1,116 @@
+{% load cart_template_tags %}
+{% load static %}
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container-fluid">
+
+          <a class="navbar-brand waves-effect" href="/">
+          <img class="nav_img" src="{% static 'img/logo2.png' %}" alt="">
+            </a>
+
+
+      <!-- Brand
+      <a class="navbar-brand waves-effect" href="/">
+          <img src="{% static 'img/logo2.png' %}" alt="">
+        <strong class="blue-text">
+            <div class="icon-head"> Eternal India </div>
+            <!-- div class="chotu"> CONNECTING SOULS WITH GOD </div -->
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+
+
+            <li class="nav-item">
+                <a class="navbar-brand waves-effect" href="/">
+               <strong class="blue-text">
+             <div class="icon-head"> Eternal India </div>
+            <!-- div class="chotu"> CONNECTING SOULS WITH GOD </div -->
+          </strong>
+      </a>
+          </li>
+
+
+
+          {% comment %} <li class="nav-item active">
+            <a class="nav-link waves-effect" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/checkout">
+            Checkout</a>
+          </li> {% endcomment %}
+        </ul>
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+          {% if request.user.is_authenticated %}
+            <li class="nav-item mr-2" >
+            <a class="nav-link waves-effect" href="{% url 'core:my-orders' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Hello {{ user.get_username }}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
+              <span class="badge red z-depth-1"> {{ request.user|cart_item_count }} </span>
+              <i class="fas fa-shopping-cart"></i>
+              <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+            </a>
+          </li>
+          <li class="nav-item mr-2">
+            <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Login </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Signup </span>
+            </a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+               <div class="md-form my-0 hideable_search_form ">
+          <form class="form-inline ml-auto" method="POST" action="{% url 'core:item-search' %}" >
+              {% csrf_token %}
+
+              <input class="form-control mr-sm-2" name="srh" type="text" placeholder="Search" aria-label="Search">
+                <button type="submit" class="trans_button" >
+                    <i class="fa fa-search"></i>
+                </button>
+          </form>
+               </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+<script type="application/javascript">
+var search = $('.trans_button');
+var hideable_search_form = $('.hideable_search_form');
+
+use_default_shipping.addEventListener('click', function() {
+alert("search");
+  if (this.true) {
+    hideable_search_form.hide();
+  } else {
+    hideable_search_form.show();
+  }
+})
+
+</script>

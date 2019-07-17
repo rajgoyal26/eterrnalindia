@@ -1,0 +1,108 @@
+/* Required height of parents of the Half Page Carousel for proper displaying carousel itself */
+html,
+body,
+.view {
+  height: 100%; }
+
+/* Half Page Carousel itself*/
+.carousel {
+  height: 50%; }
+  .carousel .carousel-inner {
+    height: 100%; }
+    .carousel .carousel-inner .carousel-item,
+    .carousel .carousel-inner .active {
+      height: 100%; }
+
+/* Adjustment for mobile devices*/
+@media (max-width: 776px) {
+  .carousel {
+    height: 100%; } }
+
+/* Footer color for sake of consistency with Navbar */
+.page-footer {
+  background-color: #929FBA; }
+
+.caro {
+  padding-top: 00px;
+}
+
+.sidebar-categories
+{
+  padding:.5rem 1rem;
+}
+
+.sidebar-categories .head
+  {
+  font-family:'Oswald', sans-serif;
+  line-height:50px;
+  background:#940C22;
+  padding: 8px;
+  font-size:18px;
+  font-weight:400;
+  color:#fff;
+
+  }
+
+  .sidebar-categories .main-categories
+   {
+     padding:20px 28px;
+     background:#f1f6f7
+   }
+
+   .sidebar-categories .main-nav-list a
+   {
+     font-size:14px;
+     display:block;
+     line-height:50px;
+     padding-left:10px;
+     border-bottom:1px solid #eee
+    }
+
+    .sidebar-categories .main-nav-list a:hover
+    {color:#384aeb}
+
+    .sidebar-categories .main-nav-list a .number
+    {color:#cccccc;margin-left:10px}
+
+    .sidebar-categories .main-nav-list a .lnr{margin-right:10px;display:none}
+
+    .sidebar-categories .main-nav-list.child a{padding-left:32px}
+
+    .sidebar-filter{margin-top:30px}
+    .sidebar-filter .top-filter-head
+    {font-family:'Oswald', sans-serif;
+     line-height:50px;
+     background:#940C22;
+     padding:8 px;
+     font-size:18px;
+     font-weight:400;
+     color:#fff
+     }
+
+     .sidebar-filter .head
+     {line-height:60px;padding:0 30px;font-size:15px;font-weight:400;color:#222;
+      text-transform:capitalize}
+
+      .sidebar-filter .common-filter
+      {background:#f1f6f7;border-bottom:1px solid #eee;padding-bottom:25px}
+
+      .sidebar-filter .common-filter .filter-list{position:relative;padding-left:28px}
+
+      .sidebar-filter .common-filter:last-child{border-bottom:0}
+      .filter-list
+      {line-height:32px}
+
+      .filter-list i
+      {margin-right:10px;
+      cursor:pointer}
+
+      .filter-list .number
+      {
+        color:#ccc
+      }
+
+      .filter-list label
+      {
+       margin-bottom:3px;
+       cursor:pointer
+       }

@@ -1,0 +1,45 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | EternalIndia{% endblock %}
+
+{% block extrastyle %}
+<style>
+    #header{
+        background: #fb3;
+        color: #930;
+    }
+    #branding h1, #branding h1 a:link, #branding h1 a:visited {
+        color: #930;
+        font-weight: bold;
+    }
+    .module h2, .module caption, .inline-group h2 {
+        margin: 0;
+        padding: 8px;
+        font-weight: 400;
+        font-size: 13px;
+        text-align: left;
+        background: #ffbb33b0;
+        color: #fff;
+    }
+    a:link, a:visited {
+        color: #333;
+        text-decoration: none;
+    }
+    div.breadcrumbs {
+        background: #ffbb33a3;
+        padding: 10px 40px;
+        border: none;
+        font-size: 14px;
+        color: #930;
+        text-align: left;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">EternalIndia</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

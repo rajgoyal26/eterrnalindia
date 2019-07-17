@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+  <main>
+     <section class="section-margin--small mb-5">
+      <div class="container-fluid">
+       <div class="row">
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+          <div class="sidebar-categories ">
+            <div class="head mdb-color lighten-3 mb-30" style="padding: .5rem 1rem;  color:#fff; margin-top:2.5rem; ">
+                <span class="navbar-brand">Categories</span>
+                </div>
+            <ul class="main-categories">
+
+                <!-- form action="#"  -->
+                    <li>
+                        <a href="{% url 'core:cate' 1 %}" class="dropdown-toggle" role="button" aria-haspopup="true"
+                  aria-expanded="false"  > Books </a>
+                   </li>
+                       <li>
+                    <a href="{% url 'core:cate' 2 %}" class="dropdown-toggle" role="button" aria-haspopup="true"
+                  aria-expanded="false"  > Musical Instruments </a>
+                   </li>
+                       <li>
+                    <a href="{% url 'core:cate' 3 %}" class="dropdown-toggle" role="button" aria-haspopup="true"
+                  aria-expanded="false"  > Statues </a>
+                   </li>
+                <!--data-toggle="dropdown"-->
+                    <li>
+                    <a href="{% url 'core:home'  %}" class="dropdown-toggle"  role="button" aria-haspopup="true"
+                  aria-expanded="false"  > All Products </a>
+                   </li>
+            </ul>
+
+                <!-- form -->
+            <div class="head mdb-color lighten-3 mt-3 mb-30"
+                 style="padding: .5rem 1rem;  color:#fff; ">
+                <span class="navbar-brand">Price Filter</span>
+                </div>
+            <form method="post" class="colorlib-form-2">
+		              <div class="row">
+		                <div class="col-md-12">
+		                  <div class="form-group">
+		                    <label for="guests"><div style="color: #901803; font-weight: 500;"> Price from: </div> </label>
+		                    <div class="form-field">
+		                      <i class="icon icon-arrow-down3"></i>
+		                      <select name="price1" id="price1" class="form-control">
+		                        <option value="1">$1</option>
+		                        <option value="10">$10</option>
+		                        <option value="20">$20</option>
+		                        <option value="30">$30</option>
+		                        <option value="40">$40</option>
+		                      </select>
+		                    </div>
+		                  </div>
+		                </div>
+
+		                <div class="col-md-12">
+		                  <div class="form-group">
+		                    <label for="guests"><div style="color: #901803; font-weight: 500;"> Price to: </div> </label>
+		                    <div class="form-field">
+		                      <i class="icon icon-arrow-down3"></i>
+		                      <select name="price2" id="price2" class="form-control">
+		                        <option value="10">$10</option>
+		                        <option value="20">$20</option>
+		                        <option value="30">$30</option>
+		                        <option value="40">$40</option>
+		                        <option value="100" selected>$100</option>
+		                      </select>
+		                    </div>
+		                  </div>
+		                </div>
+		              </div>
+		            </form>
+
+              <form class="form-inline ml-auto" method="POST" action="{% url 'core:cate'  pk  %}" >
+              {% csrf_token %}
+            <div class="md-form my-0">
+                <div style="color: #901803; font-weight: 500;">  Sort </div>
+                <button type="submit" name="sort" class="trans_button" value="lh"> Low To High
+                    <i class="fa fa-arrow-circle-up"></i>
+                </button>
+                <button type="submit" name="sort" class="trans_button"  value="hl"> High To Low
+                    <i class="fa fa-arrow-circle-down"></i>
+                </button>
+
+            </div>
+           </form>
+
+
+          </div>
+        </div>
+        <div class="col-xl-10 col-lg-9 col-md-8 col-sm-6">
+        <div class="row wow fadeIn mt-5 ">
+          {% for item in items %}
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card" style="min-height:21rem; max-height:24rem;">
+              <div class="view overlay">
+                <img src="{{ item.image.url }}" class="card-img-top" style="max-height:15rem; ">
+                <a href="{{ item.get_absolute_url }}">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+
+              <div class="card-body text-center" style="max-height:30%;" >
+                <a href="#" class="grey-text">
+                  <h5>{{ item.get_category_display }}</h5>
+                </a>
+                <h5>
+                  <strong>
+                    <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title|truncatechars:18 }}
+                      <span class="badge badge-pill {{ item.get_label_display }}-color">NEW</span>
+                    </a>
+                  </strong>
+                </h5>
+
+                <h4 class="font-weight-bold blue-text">
+                    {% if item.discount_price %}
+                       <del>${{ item.price }}</del>
+                  {% endif %}
+
+                  <div class="card-product__price">$
+                  {% if item.discount_price %}
+                  {{ item.discount_price }}
+                  {% else %}
+                  {{ item.price }}
+                  {% endif %}
+                    </div>
+                </h4>
+                 <a href="{{ item.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
+                   Add to cart
+                   <i class="fa fa-shopping-cart"></i>
+                 </a>
+              </div>
+
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
+
+
+      <!--Pagination-->
+      <div class="pagination">
+        <span class="step-links">
+            {% if items.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ contacts.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ items.number }} of {{ items.paginator.num_pages }}.
+            </span>
+
+            {% if items.has_next %}
+                <a href="?page={{ items.next_page_number }}">next</a>
+                <a href="?page={{ items.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+      </div>
+ </div>
+      </div>
+    </div>
+
+      </section>
+
+
+  </main>
+
+
+<script type="application/javascript">
+
+$("#price1,#price2").change(function(){
+    var a,b,rate,p1,p2;
+
+    p1 = $("#price1").val();
+    p2 = $("#price2").val();
+
+    $(".card-product__price").each(function(key,obj){
+         a =  $(obj).text();
+         b = a.substr(1);
+         rate = parseFloat(b);
+
+         if(rate<p1 || rate>p2){
+            $(obj).parent().parent().parent().parent().fadeOut(200);
+         }
+         else{
+            $(obj).parent().parent().parent().parent().fadeIn(200);
+         }
+    });
+});
+
+</script>
+
+{% endblock content %}
