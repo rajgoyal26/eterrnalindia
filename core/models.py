@@ -50,6 +50,7 @@ class Item(models.Model):
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField(blank=True)
     description = models.TextField()
+    bigDescription = models.TextField(blank=True)
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
 
     def __str__(self):
@@ -77,6 +78,11 @@ def product_pre_save_receiver(sender, instance, *ars, **kwargs):
 
 
 pre_save.connect(product_pre_save_receiver, sender=Item)
+
+
+class Image(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='item_name')
+    img = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
 
 
 class OrderItem(models.Model):

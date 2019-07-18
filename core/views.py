@@ -9,7 +9,7 @@ from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm, CouponForm, RefundForm
-from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund
+from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund,Image
 from django.db.models import Q
 from eternalindia.utils import transact,generate_client_token
 import stripe
@@ -481,6 +481,8 @@ class OrderSummaryView(LoginRequiredMixin, View):
 
 def ItemDetailView(request, slug):
     item = get_object_or_404(Item, slug=slug)
+    extra_imgs = Image.objects.filter(item = item)
+    #print(extra_imgs)
     cate = item.category
     rel_items = []
     all_rel_items = Item.objects.filter(category = cate)
@@ -495,7 +497,8 @@ def ItemDetailView(request, slug):
            if not a==item:
               rel_items.append(a)
     context = {"object": item,
-               "rel_items" : rel_items,}
+               "rel_items" : rel_items,
+               "extra_imgs": extra_imgs,}
     return render(request, "product.html", context)
 
 

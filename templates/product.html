@@ -11,7 +11,19 @@
         <!--Grid column-->
         <div class="col-md-6 mb-4">
 
-          <img src="{{ object.image.url }}" class="img-fluid" alt="" style="max-height:20rem;">
+
+          <div class="w3-content w3-display-container">
+             <img class="mySlides" src="{{ object.image.url }}" style="max-height:20rem;">
+            {% for imag in extra_imgs %}
+             <img class="mySlides" src="{{ imag.img.url }}" style="max-height:20rem;">
+            {% endfor %}
+
+
+          <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+          <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+        </div>
+
+
           <strong>
           <h4 class="my-4 h4"> {{ object.title }}  </h4>
           </strong>
@@ -129,4 +141,25 @@
       </div>
     </div>
   </main>
+
+<script type="application/javascript">
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  x[slideIndex-1].style.display = "block";
+}
+</script>
+
 {% endblock content %}
